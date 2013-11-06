@@ -5,11 +5,16 @@ class PieceBase
     self.color = color
   end
 
+  def validate_move(start_pos, finish_pos, current_board)
+    false
+  end
+
+  def can_be_taken_by(color)
+    false
+  end
+
 private
   attr_writer :color
-end
-
-class PieceEmpty < PieceBase
 end
 
 class PiecePawn < PieceBase

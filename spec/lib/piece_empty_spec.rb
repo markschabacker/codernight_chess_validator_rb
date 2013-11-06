@@ -1,0 +1,20 @@
+require_relative "../../lib/piece_empty"
+require_relative "shared_examples_for_piece"
+
+describe PieceEmpty do
+  it_behaves_like "a chess piece"
+
+  let(:piece) { PieceEmpty.new(:whatever) }
+
+  it "always returns false for validate_move" do
+    piece.validate_move(nil, nil, nil).should be_false
+  end
+
+  it "always returns true for can_be_taken_by" do
+    piece.can_be_taken_by(:does_not_matter).should be_true
+  end
+
+  it "always returns :empty for color" do
+    piece.color.should == :empty
+  end
+end
