@@ -5,7 +5,7 @@ class PieceEmpty < PieceBase
     :empty
   end
 
-  def can_be_taken_by(color)
+  def can_be_taken_by?(color)
     true
   end
 end

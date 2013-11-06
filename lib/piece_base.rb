@@ -9,8 +9,8 @@ class PieceBase
     false
   end
 
-  def can_be_taken_by(color)
-    false
+  def can_be_taken_by?(color)
+    self.color != color
   end
 
 private

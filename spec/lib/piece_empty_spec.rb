@@ -10,8 +10,8 @@ describe PieceEmpty do
     piece.validate_move(nil, nil, nil).should be_false
   end
 
-  it "always returns true for can_be_taken_by" do
-    piece.can_be_taken_by(:does_not_matter).should be_true
+  it "always returns true for can_be_taken_by?" do
+    piece.can_be_taken_by?(:empty).should be_true
   end
 
   it "always returns :empty for color" do
