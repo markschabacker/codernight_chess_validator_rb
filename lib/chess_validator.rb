@@ -1,3 +1,5 @@
+require_relative 'board_parser'
+
 class ChessValidator
   def initialize(board_text)
     self.board = BoardParser.new.parse_board(board_text)
