@@ -3,6 +3,10 @@ require_relative '../../lib/board_parser'
 describe "The Board Parser" do
   let (:piece_factory) { double(:piece_factory) }
 
+  it "can be instantiated without parameters" do
+    BoardParser.new.should_not be_nil
+  end
+
   it "can be instantated with a piece factory" do
     BoardParser.new(piece_factory).should_not be_nil
   end

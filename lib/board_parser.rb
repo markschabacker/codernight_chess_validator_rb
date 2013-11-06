@@ -1,6 +1,9 @@
+require_relative 'board'
+require_relative 'piece_factory'
+
 class BoardParser
 
-  def initialize(piece_factory)
+  def initialize(piece_factory = PieceFactory.new)
     self.piece_factory = piece_factory
   end
 
@@ -11,8 +14,4 @@ class BoardParser
 
 private
   attr_accessor :piece_factory
-end
-
-class Board
-  # define me!
 end
