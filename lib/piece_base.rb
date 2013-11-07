@@ -15,6 +15,10 @@ class PieceBase
       return position_criteria.call(current_board)
     end
 
+    # TODO:
+    # 1. Find opposing own king on board
+    # 2. Determine if any opposing pieces have valid moves to to the king's position
+
     false
   end
 
