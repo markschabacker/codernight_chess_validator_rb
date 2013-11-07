@@ -9,22 +9,22 @@ protected
 
     one_forward_pos = calculator.calculate_offset(0, 1 * direction_multiplier)
     condition_proc_hash[one_forward_pos] = Proc.new{|board|
-      !board.piece_at(one_forward_pos).requires_contest?
+      !self.position_requires_contest?(one_forward_pos, board)
     }
 
     if is_starting_rank?(start_pos)
       two_forward_pos = calculator.calculate_offset(0, 2 * direction_multiplier)
       condition_proc_hash[two_forward_pos] = Proc.new{|board|
         condition_proc_hash[one_forward_pos].call(board) \
-          && !board.piece_at(two_forward_pos).requires_contest?
+          && !self.position_requires_contest?(two_forward_pos, board)
       }
     end
 
     [-1, 1].each do |h_offset|
       diagonal = calculator.calculate_offset(h_offset, 1 * direction_multiplier)
       condition_proc_hash[diagonal] = Proc.new{|board|
-        diagonal_piece = board.piece_at(diagonal)
-        diagonal_piece.requires_contest? && diagonal_piece.can_be_taken_by?(self.color)
+        self.position_requires_contest?(diagonal, board) \
+          && self.position_can_be_taken?(diagonal, board)
       }
     end
 

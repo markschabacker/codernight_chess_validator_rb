@@ -35,6 +35,14 @@ protected
     AlgebraicNotationCalculator.new(position)
   end
 
+  def position_requires_contest?(position, board)
+      board.piece_at(position).requires_contest?
+  end
+
+  def position_can_be_taken?(position, board)
+    board.piece_at(position).can_be_taken_by?(self.color)
+  end
+
 private
   attr_writer :color
 end
