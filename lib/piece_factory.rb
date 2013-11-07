@@ -1,5 +1,6 @@
 require_relative 'piece_base'
 require_relative 'piece_empty'
+require_relative 'piece_pawn'
 
 class PieceFactory
   def piece_from_string(piece_string)

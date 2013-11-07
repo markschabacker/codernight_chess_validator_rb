@@ -4,6 +4,7 @@ shared_examples "a chess piece" do
   subject { piece }
   it { should respond_to(:validate_move) }
   it { should respond_to(:can_be_taken_by?) }
+  it { should respond_to(:requires_contest?) }
 end
 
 shared_examples "a colored chess piece" do
@@ -19,4 +20,8 @@ shared_examples "a colored chess piece" do
   it "can be taken by a piece of another color" do
     piece.can_be_taken_by?(:other_color).should be_true
   end
+
+   it "requires a contest" do
+     piece.requires_contest?.should be_true
+   end
 end

@@ -17,4 +17,8 @@ describe PieceEmpty do
   it "always returns :empty for color" do
     piece.color.should == :empty
   end
+
+   it "does not require a contest" do
+     piece.requires_contest?.should be_false
+   end
 end
