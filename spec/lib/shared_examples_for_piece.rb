@@ -25,6 +25,18 @@ shared_examples "a colored chess piece" do
    it "requires a contest" do
      piece.requires_contest?.should be_true
    end
+
+   it "can never perform a move that results in check" do
+    start_pos = :start_pos
+    finish_pos = :finish_pos
+
+    next_board = double(:board_after_move)
+    next_board.should_receive(:in_check?).with(color).and_return(true)
+    board = double(:board, :after_move => next_board)
+
+    piece.stub(:is_valid_before_check_check?) { true }
+    piece.validate_move(start_pos, finish_pos, board).should be_false
+   end
 end
 
 shared_examples "a non-king chess piece" do

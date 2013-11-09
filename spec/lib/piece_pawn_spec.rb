@@ -26,12 +26,21 @@ describe PiecePawn do
     double(:board, :piece_at => contesting_piece )
   }
 
+  let(:next_board) {
+    double(:board_after_move, :in_check? => false)
+  }
+
   def calculate_offset(position, file_offset, rank_offset)
     AlgebraicNotationCalculator.new(position).calculate_offset(file_offset, rank_offset)
   end
 
   [ [ PiecePawn.new("w"), "d2",  1 ],
     [ PiecePawn.new("b"), "d7", -1 ] ].each do | pawn, start_pos, direction_mult |
+    before do
+      full_board.stub(:after_move) { next_board }
+      empty_board.stub(:after_move) { next_board }
+    end
+
     describe "#{pawn.color}" do
       it "can move one unoccupied space forward" do
         one_forward = calculate_offset(start_pos, 0, 1 * direction_mult)
@@ -91,12 +100,11 @@ describe PiecePawn do
 
           board = double(:board)
           board.stub(:piece_at).with(one_diagonal) { opponent_piece }
+          board.stub(:after_move) { next_board }
 
           pawn.validate_move(start_pos, one_diagonal, board).should be_true
         end
       end
-
-      it "cannot move if the move creates a check condition"
     end
   end
 end
