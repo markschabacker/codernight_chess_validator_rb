@@ -6,6 +6,10 @@ describe PieceEmpty do
 
   let(:piece) { PieceEmpty.new(:whatever) }
 
+  it "can be initialized without a color" do
+    PieceEmpty.new.should_not be_nil
+  end
+
   it "always returns false for validate_move" do
     piece.validate_move(nil, nil, nil).should be_false
   end

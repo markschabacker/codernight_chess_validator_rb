@@ -1,6 +1,10 @@
 require_relative 'piece_base'
 
 class PieceEmpty < PieceBase
+  def initialize(color = "-")
+    super(color)
+  end
+
   def color
     :empty
   end

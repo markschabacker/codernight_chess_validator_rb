@@ -46,4 +46,15 @@ describe Board do
 
     board.king_coords(color).should == "c8"
   end
+
+  it "can move pieces" do
+    piece_a8 = :piece_a8
+    piece_b8 = :piece_b8
+
+    board = Board.new([piece_a8, piece_b8])
+    board.move("a8", "b8")
+
+    board.piece_at("b8").should == piece_a8
+    board.piece_at("a8").should be_kind_of(PieceEmpty)
+  end
 end

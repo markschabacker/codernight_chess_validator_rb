@@ -1,3 +1,5 @@
+require_relative 'piece_empty'
+
 class Board
   def initialize(piece_array)
     self.pieces = convert_array_into_algebraic_notation_hash(piece_array)
@@ -9,6 +11,12 @@ class Board
 
   def king_coords(color)
     pieces.select { |k,v| !v.nil? && v.check_target? && v.color == color }.first[0]
+  end
+
+  def move(source_coords, target_coords)
+    source_piece = piece_at(source_coords)
+    pieces[target_coords] = source_piece
+    pieces[source_coords] = PieceEmpty.new
   end
 
 private
