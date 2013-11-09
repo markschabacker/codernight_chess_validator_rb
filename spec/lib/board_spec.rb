@@ -44,7 +44,7 @@ describe Board do
     pieces = [ non_king, incorrect_king, correct_king, non_king ]
     board = Board.new(pieces)
 
-    board.king_coords(color).should == "c8"
+    board.king_position(color).should == "c8"
   end
 
   describe "moving pieces" do

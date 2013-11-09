@@ -14,16 +14,16 @@ class Board
     pieces[algebraic_position]
   end
 
-  def king_coords(color)
+  def king_position(color)
     pieces.select { |k,v| !v.nil? && v.check_target? && v.color == color }.first[0]
   end
 
-  def after_move(source_coords, target_coords)
+  def after_move(source_position, target_position)
     next_board = self.clone
 
-    source_piece = next_board.piece_at(source_coords)
-    next_board.pieces[target_coords] = source_piece
-    next_board.pieces[source_coords] = PieceEmpty.new
+    source_piece = next_board.piece_at(source_position)
+    next_board.pieces[target_position] = source_piece
+    next_board.pieces[source_position] = PieceEmpty.new
 
     next_board
   end
