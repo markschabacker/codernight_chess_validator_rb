@@ -33,4 +33,17 @@ describe Board do
     board.piece_at("a8").should == expected_a8
     board.piece_at("b8").should be_nil
   end
+
+  it "can find the king for a particular color" do
+    color = "b"
+    incorrect_color = "w"
+    non_king = double(:piece, :check_target? => false)
+    incorrect_king = double(:piece, :check_target? => true, :color => incorrect_color )
+    correct_king = double(:piece, :check_target? => true, :color => color )
+
+    pieces = [ non_king, incorrect_king, correct_king, non_king ]
+    board = Board.new(pieces)
+
+    board.king_coords(color).should == "c8"
+  end
 end

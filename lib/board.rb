@@ -7,6 +7,10 @@ class Board
     pieces[algebraic_position]
   end
 
+  def king_coords(color)
+    pieces.select { |k,v| !v.nil? && v.check_target? && v.color == color }.first[0]
+  end
+
 private
   attr_accessor :pieces
 

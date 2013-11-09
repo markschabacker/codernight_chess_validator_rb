@@ -4,6 +4,7 @@ require_relative "shared_examples_for_piece"
 
 describe PiecePawn do
   it_behaves_like "a colored chess piece"
+  it_behaves_like "a non-king chess piece"
 
   let (:no_contest_piece) {
     double(:piece, :requires_contest? => false)

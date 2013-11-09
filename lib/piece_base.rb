@@ -30,6 +30,10 @@ class PieceBase
     self.color != color
   end
 
+  def check_target?
+    false
+  end
+
 protected
   def get_valid_move_criteria(start_pos)
     {}
