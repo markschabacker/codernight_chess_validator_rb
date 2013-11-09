@@ -47,14 +47,23 @@ describe Board do
     board.king_coords(color).should == "c8"
   end
 
-  it "can move pieces" do
-    piece_a8 = :piece_a8
-    piece_b8 = :piece_b8
+  describe "moving pieces" do
+    let(:piece_a8) { :piece_a8 }
+    let(:piece_b8) { :piece_b8 }
+    let(:board) { Board.new([piece_a8, piece_b8]) }
 
-    board = Board.new([piece_a8, piece_b8])
-    board.move("a8", "b8")
+    it "does not affect the current board" do
+      board.after_move("a8", "b8")
 
-    board.piece_at("b8").should == piece_a8
-    board.piece_at("a8").should be_kind_of(PieceEmpty)
+      board.piece_at("a8").should == piece_a8
+      board.piece_at("b8").should == piece_b8
+    end
+
+    it "moves pieces in the returned board" do
+      out_board = board.after_move("a8", "b8")
+
+      out_board.piece_at("b8").should == piece_a8
+      out_board.piece_at("a8").should be_kind_of(PieceEmpty)
+    end
   end
 end
