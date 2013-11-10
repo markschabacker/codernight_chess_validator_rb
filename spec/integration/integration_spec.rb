@@ -40,4 +40,20 @@ describe "The Chess Validator" do
         end
       end
   end
+
+  it "can validate a valid pawn move that ends with a pawn in a check state" do
+
+    board = "bR bN bB bQ bK bB bN bR\n" +
+            "bP bP bP wP bP bP bP bP\n" +
+            "-- -- -- -- -- -- -- --\n" +
+            "-- -- -- -- -- -- -- --\n" +
+            "-- -- -- -- -- -- -- --\n" +
+            "-- -- -- -- -- -- -- --\n" +
+            "wP wP wP -- wP wP wP wP\n" +
+            "wR wN wB wQ wK wB wN wR"
+
+    validator = ChessValidator.new(board)
+
+    validator.validate("c7 c6").should be_false
+  end
 end

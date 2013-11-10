@@ -69,4 +69,7 @@ class PieceQueen < PieceBase
 end
 
 class PieceKing < PieceBase
+  def check_target?
+    true
+  end
 end
