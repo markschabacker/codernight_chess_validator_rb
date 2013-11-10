@@ -12,10 +12,9 @@ This month's project took longer than I expected and I was not able to finish on
 ### Complete
 - Board parsing
 - Algebraic Notation calculator
-- Pawn move validation (mostly)
+- Pawn move validation
 
 ### Incomplete
-- Check state validation
 - Pieces other than pawns
 - Command line interface
 

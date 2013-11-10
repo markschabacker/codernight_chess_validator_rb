@@ -37,8 +37,8 @@ describe Board do
   it "can find the king for a particular color" do
     color = "b"
     incorrect_color = "w"
-    non_king = double(:piece, :check_target? => false)
     incorrect_king = double(:piece, :check_target? => true, :color => incorrect_color )
+    non_king = double(:piece, :color => color, :check_target? => false)
     correct_king = double(:piece, :check_target? => true, :color => color )
 
     pieces = [ non_king, incorrect_king, correct_king, non_king ]
@@ -64,6 +64,39 @@ describe Board do
 
       out_board.piece_at("b8").should == piece_a8
       out_board.piece_at("a8").should be_kind_of(PieceEmpty)
+    end
+  end
+
+  describe "check state validation" do
+    let (:white) { "w" }
+    let (:black) { "b" }
+    let (:white_king) { double(:piece_king, :color => white, :check_target? => true) }
+    let (:white_king_pos) { "a8" }
+    let (:other_piece) { double(:piece_other, :color => black) }
+    let (:other_piece_pos) { "b8" }
+
+    it "returns false if no opposing pieces have valid moves to the color's king (no opposing pieces)" do
+      pieces = [ white_king ]
+      board = Board.new(pieces)
+      board.in_check?(white).should be_false
+    end
+
+    it "returns false if no opposing pieces have valid moves to the color's king (opposing piece not valid)" do
+      pieces = [ white_king, other_piece ]
+      board = Board.new(pieces)
+
+      other_piece.should_receive(:validate_move).with(other_piece_pos, white_king_pos, board) { false }
+
+      board.in_check?(white).should be_false
+    end
+
+    it "returns true if any opposing pieces has valid moves to the color's king" do
+      pieces = [ white_king, other_piece ]
+      board = Board.new(pieces)
+
+      other_piece.should_receive(:validate_move).with(other_piece_pos, white_king_pos, board) { true }
+
+      board.in_check?(white).should be_true
     end
   end
 end

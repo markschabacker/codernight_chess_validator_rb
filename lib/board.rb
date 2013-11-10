@@ -15,7 +15,8 @@ class Board
   end
 
   def king_position(color)
-    pieces.select { |k,v| !v.nil? && v.check_target? && v.color == color }.first[0]
+    kings = pieces.select { |k,v| !v.nil? && v.color == color && v.check_target? }
+    kings.length == 0 ? nil : kings.first[0]
   end
 
   def after_move(source_position, target_position)
@@ -26,6 +27,12 @@ class Board
     next_board.pieces[source_position] = PieceEmpty.new
 
     next_board
+  end
+
+  def in_check?(color)
+    king_pos = self.king_position(color)
+    pieces_with_check = pieces.select { |pos, piece| !piece.nil? && (piece.color != color) && piece.validate_move(pos, king_pos, self) }
+    pieces_with_check.length > 0
   end
 
 protected
